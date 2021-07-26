@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Stock Analyzer Projects</title>
+    <link rel="stylesheet" href="{{ url_for('static',filename='bootstrap.min.css') }}">
+    <script src="{{ url_for('static',filename='jquery.min.js') }}"></script>
+
+    <style>
+		input[type=button]{margin:0px 8px;}
+		.btn-default:hover,.btn-active{background:#217452 !important;color:#FFF !important;}
+		.price{text-align:center;}
+		.td_close_price{font-size:24px;}
+    </style>
+
+  </head>
+  <body>
+    <header style="background:#ABCDEF;margin:0px;padding:2px 0px;">
+      <h2 align="center">Stock Analyzer</span></h2>
+    </header>
+
+    <div class="container">
+		<div class="row" style="height:420px;margin-top:60px;">
+			<div class='col-sm-10 col-sm-offset-1'>
+					<div class='form-group row'>
+						<label class='col-sm-4 text-center'>Select Date</label>
+						<div class='col-sm-4'>
+							<input class='form-control' type='date' id='txt_date_from' min='2006-01-03' max='2017-12-29'>
+						</div>
+						<div class='col-sm-4'>
+							<input class='form-control' type='date' id='txt_date_to' min='2006-01-03' max='2017-12-29'>
+						</div>
+					</div>
+					<div class='form-group row' align="center" style='margin-top:15px;'>
+							<input type="button" class='btn btn-primary' value="Submit" onclick='fn_submit_date()'>
+					</div>
+					<hr>
+					<h2>Result</h2>
+					<table class='table table-bordered' align='center' style='max-width:420px;'>
+						<tr>
+							<td>Date</td><td class='value td_date'></td>
+						</tr>
+						<tr>
+							<td>Close Price</td><td class='price td_close_price'>0</td>
+						</tr>
+						<tr>
+							<td>Name</td><td class='value td_name'></td>
+						</tr>
+						<tr>
+							<td>Volume</td><td class='value td_volume'></td>
+						</tr>
+						<tr>
+							<td>Open Price</td><td class='price td_open_price'>0</td>
+						</tr>
+						<tr>
+							<td>High Price</td><td class='price td_high_price'>0</td>
+						</tr>
+						<tr>
+							<td>Low Price</td><td class='price td_low_price'>0</td>
+						</tr>
+						
+					</table>
+			</div>
+		</div>
+	</div>
+		
+	<div id="loading_modal" class="modal" tabindex="-1" data-backdrop="static" data-keyboard="true">
+		<div class="modal-dialog">
+			<div class="modal-content" style="background:transparent;">
+				<div class="modal-body" style='padding:0px;min-height:280px;padding-top:100px;' align='center'>
+					<img src="{{ url_for('static',filename='loading.gif') }}" style='margin:0px auto;'>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="{{ url_for('static',filename='bootstrap.min.js') }}"></script>
+  </body>
+</html>
+
+
+<script>
+	$(document).ready(function(){
+		$('#txt_date_from').val('').focus();
+		$('#txt_date_from').change(function(){
+			$('#txt_date_to').val('').attr('min',$('#txt_date_from').val());
+		});
+		
+		
+	});
+	function fn_submit_date(){
+		$('td.value').text('');
+		$('td.price').text('0');
+		
+		if($('#txt_date_from').val()==""){
+			$('#txt_date_from').focus();
+			return;
+		}
+		if($('#txt_date_to').val()==""){
+			$('#txt_date_to').focus();
+			return;
+		}
+	
+		$('#loading_modal').modal();
+		
+		$.ajax({
+			url:'/get_price',
+			data:{'dt1':$('#txt_date_from').val(),'dt2':$('#txt_date_to').val()},
+			type:'post',
+			success:function(r){
+				$('#loading_modal').modal('hide');
+				
+				//console.log(r);
+
+				var tmp=$.parseJSON(r);
+				for (var i in tmp.Date){
+					$('td.td_date').text(tmp.Date[i]);
+				}
+				for (var i in tmp.Open){
+					$('td.td_open_price').text(tmp.Open[i]);
+				}
+				for (var i in tmp.High){
+					$('td.td_high_price').text(tmp.High[i]);
+				}
+				for (var i in tmp.Low){
+					$('td.td_low_price').text(tmp.Low[i]);
+				}
+				for (var i in tmp.Close){
+					$('td.td_close_price').text(tmp.Close[i]);
+				}
+				for (var i in tmp.Volume){
+					$('td.td_volume').text(tmp.Volume[i]);
+				}
+				for (var i in tmp.Name){
+					$('td.td_name').text(tmp.Name[i]);
+				}
+				
+			},
+			error:function(e){
+				console.log(e);
+			}
+		});
+	}
+	
+</script>
