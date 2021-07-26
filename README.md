@@ -3,7 +3,7 @@ Overview:<br>
 Assignment done by Group 2 , course CSDA1040, 2021 York University; <br>
 Contributor: Crescent Faruq, Krishna Shah, Leonard, Rohan Venkatesh!
 <br><br>
-Analyze IBM stock from supplied CSV and find out highest CLOSE price based on specific date range selection..
+Analyze IBM stock from supplied CSV, find out highest CLOSE price based on specific date range selection..
 <br><br>
 Apps URL: https://stockanalysisg2.uc.r.appspot.com/
 <br><br>
