@@ -1,11 +1,11 @@
-# TweetAnalyzer<br><br>
+# StockAnalyzer<br><br>
 Overview:<br>
 Assignment done by Group 2 , course CSDA1040, 2021 York University; <br>
 Contribution: Crescent Faruq, Krishna Shah, Leonard, Rohan Venkatesh!
 <br><br>
 Analyze Tweet response and find its a Positive, Negative or Neutral Tweet..
 <br><br>
-Apps URL: https://tweetanalyzergroup2.ue.r.appspot.com/
+Apps URL: https://stockanalysisg2.uc.r.appspot.com/
 <br><br>
 Plugin and Programming Language Used :<br>
 Language Python 3.9 ;<br>
