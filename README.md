@@ -1,9 +1,9 @@
 # StockAnalyzer<br><br>
 Overview:<br>
 Assignment done by Group 2 , course CSDA1040, 2021 York University; <br>
-Contribution: Crescent Faruq, Krishna Shah, Leonard, Rohan Venkatesh!
+Contributor: Crescent Faruq, Krishna Shah, Leonard, Rohan Venkatesh!
 <br><br>
-Analyze Tweet response and find its a Positive, Negative or Neutral Tweet..
+Analyze IBM stock from supplied CSV and find out highest CLOSE price based on specific date range selection..
 <br><br>
 Apps URL: https://stockanalysisg2.uc.r.appspot.com/
 <br><br>
